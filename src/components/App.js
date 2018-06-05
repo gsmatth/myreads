@@ -10,12 +10,28 @@ class App extends Component {
  
   }
 
+ 
   componentDidMount(){
     BooksAPI.getAll()
+    .then((books) => {
+      console.log('array of books in componentDidMount: ', books);
+      return books;
+    })
     .then((books) => {
       this.setState(() => ({
         books
       }))
+    })
+  }
+
+  updateBook = (book, shelf) => {
+    BooksAPI.update(book, shelf )
+    .then((book) => {
+      console.log("test");
+      //find book with book.id
+      this.setState(() => {
+        //update value of shelf property
+      })
     })
   }
 
@@ -25,6 +41,7 @@ class App extends Component {
       <Route exact path='/' render={() => (
         <ListBooks
           books={this.state.books}
+          updateBook={this.updateBook}
         />
       )}
       />
