@@ -26,11 +26,16 @@ class App extends Component {
 
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf )
-    .then((book) => {
-      console.log("test");
-      //find book with book.id
-      this.setState(() => {
-        //update value of shelf property
+    .then((updatedBooksObject) => {
+      let bookIndex = this.state.books.findIndex((element) => {
+        return element.id === book.id});
+      book.shelf = shelf;
+      return bookIndex;
+    })
+    .then((bookIndex) => {
+      this.setState(() => { 
+      this.state.books.splice(bookIndex, 1, book);
+      console.log("book state after update in updateBook, app.js: ", this.state.books);
       })
     })
   }

@@ -5,8 +5,18 @@ import '../styles/App.css';
 
 class BookItem extends Component {
   static propTypes = {
-    book: PropTypes.object.isRequired
+    book: PropTypes.object.isRequired,
+    updateBookShelf: PropTypes.func.isRequired
   }
+
+  handleChange = (event) => {
+    console.log("handleChange() entered in BootItem.js");
+    console.log("props in BookItem: ", this.props);
+    console.log("book in handleChange in BookItem.sj: ", this.props.book);
+    event.preventDefault();
+    const shelf = event.target.value;
+    this.props.updateBookShelf(this.props.book, shelf);
+  };
 
   render(){
     const {book} = this.props;
@@ -22,9 +32,19 @@ class BookItem extends Component {
               backgroundImage: `url(${book.imageLinks.thumbnail})`
           }} 
           ></div>
+        <div className="book-shelf-changer">
+          <select onChange={this.handleChange}>
+            <option value="none" disabled>Move to...</option>
+            <option value="currentlyReading">Currently Reading</option>
+            <option value="wantToRead">Want to Read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
+          </select>
+        </div>
         </div>
         <div className="book-title">Title: {book.title}</div>
         <div className="book-authors">Author: {book.authors}</div>
+        <div className="book-id">ID: {book.id}</div>
         <div className="book-shelf">Shelf: {book.shelf}</div>
       </div>
       </li>
