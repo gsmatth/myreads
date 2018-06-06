@@ -7,6 +7,7 @@ import BookItem from './BookItem';
 class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
+    updateBook: PropTypes.func.isRequired
   }
 
   render(){
@@ -30,7 +31,7 @@ class ListBooks extends Component {
 
                 <ol className="books-grid">
                 {currentlyReadingShelf.map((book) => (
-                  <BookItem key={book.id} book={book}/>
+                  <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
                 ))}
                 </ol>
               </div>
@@ -43,7 +44,7 @@ class ListBooks extends Component {
 
                 <ol className="books-grid">
                 {readShelf.map((book) => (
-                  <BookItem key={book.id} book={book}/>
+                  <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
                 ))}
               </ol>
             </div>
@@ -56,7 +57,7 @@ class ListBooks extends Component {
 
             <ol className="books-grid">
             {wantToReadShelf.map((book) => (
-              <BookItem key={book.id} book={book}/>
+              <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
             ))}
           </ol>
         </div>
