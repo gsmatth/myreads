@@ -27,15 +27,23 @@ class App extends Component {
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf )
     .then((updatedBooksObject) => {
-      let bookIndex = this.state.books.findIndex((element) => {
-        return element.id === book.id});
-      book.shelf = shelf;
-      return bookIndex;
-    })
+      console.log("updatedBooksObject: ", updatedBooksObject)
+
+      let updatedBookID = updatedBooksObject[shelf].find((id)=>{
+        return id === book.id
+      });
+      if(updatedBookID){
+        let bookIndex = this.state.books.findIndex((element) => {
+          return element.id === updatedBookID});
+        console.log("updatedBookID: ", updatedBookID);
+        console.log("bookIndex: ", bookIndex);
+        book.shelf = shelf;
+        return bookIndex;
+    }})
     .then((bookIndex) => {
       this.setState(() => { 
-      this.state.books.splice(bookIndex, 1, book);
-      console.log("book state after update in updateBook, app.js: ", this.state.books);
+        this.state.books.splice(bookIndex, 1, book);
+        console.log("book state after update in updateBook, app.js: ", this.state.books);
       })
     })
   }

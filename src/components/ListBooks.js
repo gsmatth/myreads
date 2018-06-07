@@ -16,6 +16,10 @@ class ListBooks extends Component {
     const currentlyReadingShelf = books.filter((book) => book.shelf === "currentlyReading");
     const readShelf = books.filter((book) => book.shelf === "read");
     const wantToReadShelf = books.filter((book) => book.shelf === "wantToRead");
+
+    console.log("currentlyReading array in ListBooks.js: ", currentlyReadingShelf);
+    console.log("readShelf array in ListBooks.js: ", readShelf);
+    console.log("wantToReadShelf array in ListBooks.js: ", wantToReadShelf);
     console.log("updateBook props in ListBooks: ", updateBook);
 
     return(
