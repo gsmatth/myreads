@@ -7,12 +7,12 @@ import BookItem from './BookItem';
 class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    updateBook: PropTypes.func.isRequired
+    updateBookShelf: PropTypes.func.isRequired
   }
 
   render(){
 
-    const {books, updateBook} = this.props;
+    const {books, updateBookShelf} = this.props;
     const currentlyReadingShelf = books.filter((book) => book.shelf === "currentlyReading");
     const readShelf = books.filter((book) => book.shelf === "read");
     const wantToReadShelf = books.filter((book) => book.shelf === "wantToRead");
@@ -20,7 +20,7 @@ class ListBooks extends Component {
     console.log("currentlyReading array in ListBooks.js: ", currentlyReadingShelf);
     console.log("readShelf array in ListBooks.js: ", readShelf);
     console.log("wantToReadShelf array in ListBooks.js: ", wantToReadShelf);
-    console.log("updateBook props in ListBooks: ", updateBook);
+    console.log("updateBook props in ListBooks: ", updateBookShelf);
 
     return(
       <div className='list-books'>
@@ -35,7 +35,7 @@ class ListBooks extends Component {
 
                 <ol className="books-grid">
                 {currentlyReadingShelf.map((book) => (
-                  <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
+                  <BookItem key={book.id} book={book} updateBookShelf={updateBookShelf}/>
                 ))}
                 </ol>
               </div>
@@ -48,7 +48,7 @@ class ListBooks extends Component {
 
                 <ol className="books-grid">
                 {readShelf.map((book) => (
-                  <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
+                  <BookItem key={book.id} book={book} updateBookShelf={updateBookShelf}/>
                 ))}
               </ol>
             </div>
@@ -61,7 +61,7 @@ class ListBooks extends Component {
 
             <ol className="books-grid">
             {wantToReadShelf.map((book) => (
-              <BookItem key={book.id} book={book} updateBookShelf={updateBook}/>
+              <BookItem key={book.id} book={book} updateBookShelf={updateBookShelf}/>
             ))}
           </ol>
         </div>

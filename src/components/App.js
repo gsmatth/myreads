@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Route} from 'react-router-dom';
 import ListBooks from './ListBooks';
+import SearchBooks from './SearchBooks';
 import * as BooksAPI from '../utils/BooksAPI';
 import '../styles/App.css'
 
@@ -24,7 +25,7 @@ class App extends Component {
     })
   }
 
-  updateBook = (book, shelf) => {
+  UpdateBookShelf = (book, shelf) => {
     BooksAPI.update(book, shelf )
     .then((updatedBooksObject) => {
       console.log("updatedBooksObject: ", updatedBooksObject)
@@ -41,12 +42,16 @@ class App extends Component {
         return bookIndex;
     }})
     .then((bookIndex) => {
-      this.setState(() => { 
-        this.state.books.splice(bookIndex, 1, book);
-        console.log("book state after update in updateBook, app.js: ", this.state.books);
+      this.setState((state) => {
+        console.log("state before: ", this.state);
+        const books = [...state.books]
+        books.splice(bookIndex, 1, book);
+        console.log("book state after update in UpdateBookShelf, app.js: ", books);
+        return { books }
       })
-    })
-  }
+    console.log("state after: ", this.state);
+  })
+}
 
   render() {
     return (
@@ -54,8 +59,15 @@ class App extends Component {
       <Route exact path='/' render={() => (
         <ListBooks
           books={this.state.books}
-          updateBook={this.updateBook}
+          updateBookShelf={this.UpdateBookShelf}
         />
+      )}
+      />
+      <Route path='/search' render={() => (
+        <SearchBooks
+          books={this.state.books}
+          updateBooksShelf={this.UpdateBookShelf}
+      />
       )}
       />
       </div>
