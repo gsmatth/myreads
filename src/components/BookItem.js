@@ -10,9 +10,9 @@ class BookItem extends Component {
   }
 
   handleChange = (event) => {
-    console.log("handleChange() entered in BootItem.js");
-    console.log("props in BookItem: ", this.props);
-    console.log("book in handleChange in BookItem.sj: ", this.props.book);
+    console.log("handleChange(), BookItem.js entered");
+    console.log("handlChange(), BookItem.js, props: ", this.props);
+    console.log("handlChange(), BookItem.js, book: ", this.props.book);
     event.preventDefault();
     const shelf = event.target.value;
     this.props.updateBookShelf(this.props.book, shelf);

@@ -1,24 +1,36 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {search} from '../utils/BooksAPI';
+import PropTypes from 'prop-types';
+import ListBooks from './ListBooks';
 
 
 class SearchBooks extends Component {
 
+  static PropTypes = {
+    books: PropTypes.array.isRequired
+  }
+
+  state = {
+    BookSearchResult: [],
+    query: '',
+  }
+
+  updateQuery = (query) => {
+    this.setState(() => ({
+      query: query.trim()
+    }))
+  }
+  
+
   render(){
 
-    const showImageLink = async () => {
-      const mySearch = await search("Photography");
-      //map over array and return new array with just the image link strings
-      console.log("my search: ", mySearch );
-      console.log("image link: ", mySearch[0].imageLinks.thumbnail);
-    }
-    showImageLink();
 
     return(
       <div>
       <Link to="/">Home</Link>
-        Search
+
+      <ListBooks/>
       </div>
     )
   }
